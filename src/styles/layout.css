@@ -1,0 +1,7 @@
+:root {
+  --navbar-height: 40px;
+}
+
+html {
+  padding-bottom: var(--navbar-height);
+}

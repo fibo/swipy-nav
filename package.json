@@ -1,0 +1,59 @@
+{
+  "name": "swipy-nav",
+  "private": true,
+  "version": "7.0.0",
+  "type": "module",
+  "scripts": {
+    "check_types": "tsc --build",
+    "eslint--fix": "eslint --fix .",
+    "lint-staged": "lint-staged",
+    "prettier": "prettier --write .",
+    "start": "vite"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.19.0",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^9.19.0",
+    "globals": "^15.14.0",
+    "lint-staged": "^15.4.3",
+    "pre-commit": "^1.2.2",
+    "prettier": "^3.5.1",
+    "sass-embedded": "^1.85.0",
+    "typescript": "~5.7.2",
+    "typescript-eslint": "^8.22.0",
+    "vite": "^6.1.0"
+  },
+  "license": "MIT",
+  "homepage": "https://fibo.github.io/swipy-nav",
+  "author": {
+    "name": "Gianluca Casati",
+    "url": "http://fibo.github.io"
+  },
+  "lint-staged": {
+    "**/*.json": [
+      "prettier --write"
+    ],
+    "**/*.{js,ts,tsx}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "**/*.css": [
+      "prettier --write"
+    ]
+  },
+  "pre-commit": [
+    "check_types",
+    "lint-staged"
+  ],
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  }
+}
