@@ -1,24 +1,33 @@
 import {
+  Dispatch,
   Fragment,
-  ReactNode,
-  useState,
-  useRef,
-  useCallback,
+  PointerEventHandler,
   PropsWithChildren,
-  PointerEventHandler
+  ReactNode,
+  SetStateAction,
+  useCallback,
+  useMemo,
+  useRef
 } from 'react'
 
-type SwiperProps = {
+export type SwiperProps = {
   slides: Array<{
     id: string
     component: ReactNode
   }>
+  currentSlideIndex: number
+  setCurrentSlideIndex: Dispatch<SetStateAction<number>>
 }
 
-export function Swiper({ slides }: SwiperProps) {
-  const [currentIndex, setCurrentIndex] = useState(0)
+export function Swiper({
+  currentSlideIndex,
+  setCurrentSlideIndex,
+  slides
+}: SwiperProps) {
   const startX = useRef(0)
   const endX = useRef(0)
+
+  const numSlides = useMemo(() => slides.length, [slides])
 
   const onPointerDown = useCallback<PointerEventHandler<HTMLDivElement>>(
     (event) => {
@@ -36,11 +45,13 @@ export function Swiper({ slides }: SwiperProps) {
 
   const onPointerUp = useCallback(() => {
     if (startX.current - endX.current > 50) {
-      setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, slides.length - 1))
+      setCurrentSlideIndex((prevIndex) =>
+        Math.min(prevIndex + 1, numSlides - 1)
+      )
     } else if (endX.current - startX.current > 50) {
-      setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0))
+      setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
     }
-  }, [])
+  }, [setCurrentSlideIndex, numSlides])
 
   return (
     <div
@@ -51,7 +62,7 @@ export function Swiper({ slides }: SwiperProps) {
     >
       <div
         className="swiper-wrapper"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
       >
         {slides.map(({ id, component }) => (
           <Fragment key={id}>{component}</Fragment>
