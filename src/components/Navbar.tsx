@@ -1,5 +1,18 @@
-import { MouseEventHandler, PropsWithChildren, useCallback } from 'react'
+import {
+  MouseEventHandler,
+  PropsWithChildren,
+  useCallback,
+  useMemo
+} from 'react'
 import { SwiperProps } from './Swiper'
+import { Slide, SlideId } from '../slides'
+
+// Usually this info is in translations files.
+const navbarItemLabel: Record<SlideId, string> = {
+  home: 'Home',
+  settings: 'Settings',
+  notifications: 'Notifications'
+}
 
 type NavbarItemProps = {
   isActive: boolean
@@ -20,15 +33,23 @@ function NavbarItem({
   )
 }
 
-type NavbarProps = Pick<SwiperProps, 'currentSlideIndex'>
+type NavbarProps = Pick<SwiperProps, 'currentSlideIndex'> & {
+  slides: Slide[]
+}
 
-export function Navbar({ currentSlideIndex }: NavbarProps) {
-  console.log(currentSlideIndex)
+export function Navbar({ currentSlideIndex, slides }: NavbarProps) {
+  const labels = useMemo<string[]>(
+    () => slides.map(({ id }) => navbarItemLabel[id]),
+    [slides]
+  )
 
   return (
     <nav className="navbar">
-      <NavbarItem isActive={currentSlideIndex == 0}>Home</NavbarItem>
-      <NavbarItem isActive={currentSlideIndex == 1}>Settings</NavbarItem>
+      {slides.map(({ id }, index) => (
+        <NavbarItem key={id} isActive={currentSlideIndex == index}>
+          {labels[index]}
+        </NavbarItem>
+      ))}
     </nav>
   )
 }

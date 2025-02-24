@@ -1,21 +1,13 @@
 import { useState } from 'react'
-import { Swiper, SwiperProps } from './Swiper'
+import { Swiper } from './Swiper'
 import { Navbar } from './Navbar.tsx'
-import { Home } from '../pages/Home.tsx'
-import { Settings } from '../pages/Settings.tsx'
+import { Slide } from '../slides.tsx'
 
-const slides: SwiperProps['slides'] = [
-  {
-    id: 'home',
-    component: <Home />
-  },
-  {
-    id: 'settings',
-    component: <Settings />
-  }
-]
+type Props = {
+  slides: Slide[]
+}
 
-export function Layout() {
+export function Layout({ slides }: Props) {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0)
 
   return (
@@ -25,7 +17,7 @@ export function Layout() {
         currentSlideIndex={currentSlideIndex}
         setCurrentSlideIndex={setCurrentSlideIndex}
       />
-      <Navbar currentSlideIndex={currentSlideIndex} />
+      <Navbar currentSlideIndex={currentSlideIndex} slides={slides} />
     </>
   )
 }
