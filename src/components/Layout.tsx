@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Swiper } from './Swiper'
-import { Navbar } from './Navbar.tsx'
-import { Slide } from '../slides.tsx'
+import { Swiper } from '@/components/Swiper'
+import { Navbar } from '@/components/Navbar'
+import { Slide } from '@/slides'
 
 type Props = {
   slides: Slide[]

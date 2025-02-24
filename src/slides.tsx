@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
-import { Home } from './pages/Home.tsx'
-import { Notifications } from './pages/Notifications.tsx'
-import { Settings } from './pages/Settings.tsx'
+import { Home } from '@/pages/Home'
+import { Notifications } from '@/pages/Notifications'
+import { Settings } from '@/pages/Settings'
 
 export const slideIds = ['home', 'settings', 'notifications'] as const
 export type SlideId = (typeof slideIds)[number]
