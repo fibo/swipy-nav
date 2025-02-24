@@ -6,4 +6,6 @@
 
 @import './components/Navbar.css';
 @import './components/Swiper.css';
+@import './components/Icon.css';
+
 @import './pages/Settings.css';

@@ -19,6 +19,12 @@
   cursor: pointer;
 }
 
+.navbar__item a {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
 .navbar__item--active {
   color: var(--color-primary);
   cursor: default;

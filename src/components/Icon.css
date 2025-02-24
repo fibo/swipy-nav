@@ -1,0 +1,6 @@
+.icon {
+  display: inline-grid;
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  place-content: center;
+}

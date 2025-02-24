@@ -1,4 +1,4 @@
-import { SwiperSlide } from '../components/Swiper'
+import { SwiperSlide } from '@/components/Swiper'
 
 export function Notifications() {
   return (
