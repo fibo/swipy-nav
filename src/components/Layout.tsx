@@ -17,7 +17,11 @@ export function Layout({ slides }: Props) {
         currentSlideIndex={currentSlideIndex}
         setCurrentSlideIndex={setCurrentSlideIndex}
       />
-      <Navbar currentSlideIndex={currentSlideIndex} slides={slides} />
+      <Navbar
+        currentSlideIndex={currentSlideIndex}
+        setCurrentSlideIndex={setCurrentSlideIndex}
+        slides={slides}
+      />
     </>
   )
 }
