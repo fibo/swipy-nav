@@ -5,8 +5,10 @@
   "type": "module",
   "scripts": {
     "check_types": "tsc --build",
+    "build": "vite build",
     "eslint--fix": "eslint --fix .",
     "lint-staged": "lint-staged",
+    "prebuild": "npm run check_types",
     "prettier": "prettier --write .",
     "start": "vite",
     "test": "playwright test -c playwright-ct.config.ts --quiet --reporter=list",
