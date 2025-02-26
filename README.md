@@ -11,7 +11,7 @@ Or see the [online demo](https://fibo.github.io/swipy-nav)
 
 ## Deploy
 
-Demo is deployed on GitHub Pages via [this GitHub Action](./.github/workflows//gh-pages.yml).
+Demo is deployed on GitHub Pages via [this GitHub Action](./.github/workflows/deploy.yml).
 To trigger it just push on `gh-pages` branch.
 
 ## License
