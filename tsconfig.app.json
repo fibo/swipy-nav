@@ -22,10 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
 
-    // Path aliases
-    "baseUrl": "./",
+    /* Package import */
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "#/*": ["./src/*"]
     }
   },
   "include": ["src"]

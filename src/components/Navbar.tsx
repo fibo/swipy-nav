@@ -1,7 +1,7 @@
 import { MouseEventHandler, PropsWithChildren, useMemo } from 'react'
-import { SwiperProps } from '@/components/Swiper'
-import { Icon, IconName } from '@/components/Icon'
-import { Slide, SlideId } from '@/slides'
+import { SwiperProps } from '#/components/Swiper'
+import { Icon, IconName } from '#/components/Icon'
+import { Slide, SlideId } from '#/slides'
 
 // Usually this info is in translations files.
 const navbarItemLabel: Record<SlideId, string> = {
