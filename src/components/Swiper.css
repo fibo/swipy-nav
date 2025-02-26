@@ -13,5 +13,5 @@
 
 .swiper-slide {
   min-height: calc(100vh - var(--navbar-height));
-  min-width: 100vw;
+  min-width: 100%;
 }
