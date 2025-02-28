@@ -12,7 +12,7 @@ const navbarItemLabel: Record<SlideId, string> = {
 
 type NavbarItemProps = {
   isActive: boolean
-  onClick: MouseEventHandler<HTMLAnchorElement>
+  onClick: MouseEventHandler<HTMLButtonElement>
 }
 
 function NavbarItem({
@@ -21,9 +21,12 @@ function NavbarItem({
   children
 }: PropsWithChildren<NavbarItemProps>) {
   return (
-    <div className={`navbar__item ${isActive ? 'navbar__item--active' : ''}`}>
-      <a onClick={onClick}>{children}</a>
-    </div>
+    <button
+      className={`navbar__item ${isActive ? 'navbar__item--active' : ''}`}
+      onClick={onClick}
+    >
+      {children}
+    </button>
   )
 }
 
