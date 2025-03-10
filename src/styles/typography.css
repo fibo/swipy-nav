@@ -2,8 +2,9 @@
   --font-family: system-ui, sans-serif;
 }
 
-body {
+html {
   font-family: var(--font-family);
+  font-size: 16px;
 }
 
 h1 {
@@ -38,7 +39,7 @@ h6 {
 p {
   font-size: 1rem;
   line-height: 1.6;
-  max-width: 70ch;
+  max-width: 50ch;
   text-wrap: balance;
   text-wrap: pretty;
 }

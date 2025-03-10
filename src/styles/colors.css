@@ -2,8 +2,21 @@
   --color-black: #121212;
   --color-white: #fff;
   --color-primary: #1effcf;
+  --color-link: #cf1eff;
 }
+
 body {
   background-color: var(--color-white);
   color: var(--color-black);
+}
+
+a,
+a:visited {
+  transition: color var(--duration-1);
+  color: var(--color-black);
+}
+a:hover,
+a:focus,
+a:active {
+  color: var(--color-link);
 }
