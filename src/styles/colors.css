@@ -10,13 +10,22 @@ body {
   color: var(--color-black);
 }
 
+*::selection {
+  background-color: var(--color-primary);
+  color: var(--color-black);
+}
+
 a,
 a:visited {
   transition: color var(--duration-1);
   color: var(--color-black);
+  outline-color: var(--color-link);
 }
 a:hover,
 a:focus,
 a:active {
   color: var(--color-link);
+}
+a:focus {
+  text-decoration: none;
 }

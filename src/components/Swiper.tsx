@@ -19,6 +19,8 @@ export type SwiperProps = {
   setCurrentSlideIndex: Dispatch<SetStateAction<number>>
 }
 
+const swipeDelta = 25
+
 export function Swiper({
   currentSlideIndex,
   setCurrentSlideIndex,
@@ -44,11 +46,14 @@ export function Swiper({
   )
 
   const onPointerUp = useCallback(() => {
-    if (startX.current - endX.current > 50) {
+    // Do nothing if some text is selected.
+    if (getSelection()?.toString()) return
+    // Check if swipe is long enough to change slide.
+    if (startX.current - endX.current > swipeDelta) {
       setCurrentSlideIndex((prevIndex) =>
         Math.min(prevIndex + 1, numSlides - 1)
       )
-    } else if (endX.current - startX.current > 50) {
+    } else if (endX.current - startX.current > swipeDelta) {
       setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
     }
   }, [setCurrentSlideIndex, numSlides])
