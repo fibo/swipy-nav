@@ -1,9 +1,12 @@
+import { Content } from '#/components/Content'
 import { SwiperSlide } from '#/components/Swiper'
 
 export function Settings() {
   return (
     <SwiperSlide className="settings-page">
-      <h1>Settings</h1>
+      <Content>
+        <h1>Settings</h1>
+      </Content>
     </SwiperSlide>
   )
 }

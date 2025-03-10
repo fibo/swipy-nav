@@ -4,6 +4,7 @@
 @import './styles/colors.css';
 @import './styles/layout.css';
 
+@import './components/Content.css';
 @import './components/Navbar.css';
 @import './components/Swiper.css';
 @import './components/Icon.css';
