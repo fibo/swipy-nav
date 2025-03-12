@@ -47,7 +47,6 @@
       "prettier --write"
     ],
     "**/*.{js,ts,tsx}": [
-      "prettier --write",
       "eslint --fix"
     ],
     "**/*.css": [
