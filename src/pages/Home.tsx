@@ -12,7 +12,7 @@ export function Home() {
         </p>
 
         <p>
-          One of the main goals is to provide a minimal boilerplate as a starting point for web applications with this layout style.<br />Finally, say goodbye to the 🍔 hamburger menu icon!
+          One of the main goals is to provide a minimal boilerplate as a starting point for web applications with this layout style.<br /> Finally, say goodbye to the 🍔 hamburger menu icon!
         </p>
 
         <p>
@@ -47,6 +47,12 @@ export function Home() {
 
         <p>
           This <a href="https://github.com/fibo/swipy-nav/blob/main/src/main.css">main.css</a> file is the starting point for all styles. It just contains the imports to styles splitted by categories and import to components styles. The build tool, in this case <em>Vite</em>, will do the rest.
+        </p>
+
+        <h3>Indenting</h3>
+
+        <p>
+          I still think that <em>prettier</em> is a good choice in many cases but here I am using a different approach. Indendation for JS, TS and TSX files is provided by <a href="https://eslint.style/">ESLint Stylistic.</a> For CSS, HTML and JSON files I am using <a href="https://prettier.io/">Prettier</a>. On top of that there is a <a href="https://editorconfig.org/">.editorconfig</a> file to provide some basic settings.
         </p>
       </Content>
     </SwiperSlide>

@@ -49,21 +49,20 @@ export function Navbar({
   slides
 }: NavbarProps) {
   const items = useMemo<Item[]>(
-    () =>
-      slides.map(({ id }, index) => {
-        const isActive = currentSlideIndex == index
-        return {
-          id,
-          iconName: id,
-          isActive,
-          label: navbarItemLabel[id],
-          onClick: (event) => {
-            event.preventDefault()
-            if (isActive) return
-            setCurrentSlideIndex(index)
-          }
+    () => slides.map(({ id }, index) => {
+      const isActive = currentSlideIndex == index
+      return {
+        id,
+        iconName: id,
+        isActive,
+        label: navbarItemLabel[id],
+        onClick: (event) => {
+          event.preventDefault()
+          if (isActive) return
+          setCurrentSlideIndex(index)
         }
-      }),
+      }
+    }),
     [currentSlideIndex, slides]
   )
 
@@ -72,7 +71,7 @@ export function Navbar({
       {items.map(({ id, label, iconName, ...props }) => {
         return (
           <NavbarItem key={id} {...props}>
-            <Icon name={iconName}></Icon>
+            <Icon name={iconName} />
             <span> {label} </span>
           </NavbarItem>
         )

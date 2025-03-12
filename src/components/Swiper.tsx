@@ -1,5 +1,4 @@
-import {
-  Dispatch,
+import { Dispatch,
   Fragment,
   PointerEventHandler,
   PropsWithChildren,
@@ -7,8 +6,7 @@ import {
   SetStateAction,
   useCallback,
   useMemo,
-  useRef
-} from 'react'
+  useRef } from 'react'
 
 export type SwiperProps = {
   slides: Array<{
@@ -50,8 +48,7 @@ export function Swiper({
     if (getSelection()?.toString()) return
     // Check if swipe is long enough to change slide.
     if (startX.current - endX.current > swipeDelta) {
-      setCurrentSlideIndex((prevIndex) =>
-        Math.min(prevIndex + 1, numSlides - 1)
+      setCurrentSlideIndex((prevIndex) => Math.min(prevIndex + 1, numSlides - 1)
       )
     } else if (endX.current - startX.current > swipeDelta) {
       setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))

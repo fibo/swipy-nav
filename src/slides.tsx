@@ -14,14 +14,14 @@ export type Slide = {
 export const slides: Slide[] = [
   {
     id: 'home',
-    component: <Home />
+    component: <Home />,
   },
   {
     id: 'settings',
-    component: <Settings />
+    component: <Settings />,
   },
   {
     id: 'notifications',
-    component: <Notifications />
-  }
+    component: <Notifications />,
+  },
 ]

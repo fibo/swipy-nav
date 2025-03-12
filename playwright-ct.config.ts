@@ -25,18 +25,18 @@ export default defineConfig({
     trace: 'on-first-retry',
 
     /* Port to use for Playwright component endpoint. */
-    ctPort: 3100
+    ctPort: 3100,
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
       name: 'desktop',
-      use: { ...devices['Desktop Chrome'] }
+      use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'mobile',
-      use: { ...devices['iPhone SE'] }
-    }
-  ]
+      use: { ...devices['iPhone SE'] },
+    },
+  ],
 })

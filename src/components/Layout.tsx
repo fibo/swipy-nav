@@ -13,9 +13,9 @@ export function Layout({ slides }: Props) {
   return (
     <>
       <Swiper
-        slides={slides}
         currentSlideIndex={currentSlideIndex}
         setCurrentSlideIndex={setCurrentSlideIndex}
+        slides={slides}
       />
       <Navbar
         currentSlideIndex={currentSlideIndex}

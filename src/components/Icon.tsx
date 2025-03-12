@@ -35,7 +35,7 @@ export function Icon({ name, size = '1em' }: Props) {
   const { jsx, viewBox } = iconRecord[name]
   return (
     <span className="icon">
-      <svg viewBox={viewBox} width={size} height={size} fill="currentColor">
+      <svg fill="currentColor" height={size} viewBox={viewBox} width={size}>
         {jsx}
       </svg>
     </span>

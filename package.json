@@ -23,6 +23,7 @@
   "devDependencies": {
     "@eslint/js": "^9.19.0",
     "@playwright/experimental-ct-react": "^1.50.1",
+    "@stylistic/eslint-plugin": "^4.2.0",
     "@types/node": "^22.13.5",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -43,14 +44,11 @@
     "url": "http://fibo.github.io"
   },
   "lint-staged": {
-    "**/*.json": [
+    "**/*.{css,html,json}": [
       "prettier --write"
     ],
     "**/*.{js,ts,tsx}": [
       "eslint --fix"
-    ],
-    "**/*.css": [
-      "prettier --write"
     ]
   },
   "pre-commit": [
