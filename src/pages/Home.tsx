@@ -1,5 +1,6 @@
 import { Content } from '#/components/Content'
 import { SwiperSlide } from '#/components/Swiper'
+import { ExternalLink } from '#/components/ExternalLink'
 
 export function Home() {
   return (
@@ -22,7 +23,7 @@ export function Home() {
         <h2>Tech Stack</h2>
 
         <p>
-          This webapp is hosted on <em>GitHub Pages</em> with its source code available in the <a href="https://github.com/fibo/swipy-nav">fibo/swipy-nav</a> repository.
+          This webapp is hosted on <em>GitHub Pages</em> with its source code available in the <ExternalLink href="https://github.com/fibo/swipy-nav">fibo/swipy-nav</ExternalLink> repository.
         </p>
 
         <h3>Testing</h3>
@@ -32,27 +33,27 @@ export function Home() {
         </p>
 
         <p>
-          For JavaScript backend runtime testing (i.e., Node.js), you can utilize the built-in <a href="https://nodejs.org/api/test.html">Node Test runner</a>. It eliminates the need for additional dependencies while providing comprehensive testing capabilities.
+          For JavaScript backend runtime testing (i.e., Node.js), you can utilize the built-in <ExternalLink href="https://nodejs.org/api/test.html">Node Test runner</ExternalLink>. It eliminates the need for additional dependencies while providing comprehensive testing capabilities.
         </p>
 
         <p>
-          On the other side, for JavaScript frontend runtime testing it does not make sense to me to mock the DOM especially now that there is an awesome alternative! So instead of using <em>jest</em> or <em>jsdom</em> let's try with a <strong>real</strong> browser.<br /> Introducing <a href="https://playwright.dev/docs/test-components">Playwright Tests for components</a>.
+          On the other side, for JavaScript frontend runtime testing it does not make sense to me to mock the DOM especially now that there is an awesome alternative! So instead of using <em>jest</em> or <em>jsdom</em> let's try with a <strong>real</strong> browser.<br /> Introducing <ExternalLink href="https://playwright.dev/docs/test-components">Playwright Tests for components</ExternalLink>.
         </p>
 
         <h3>Styling</h3>
 
         <p>
-          It may not sound like a super innovative approach but here I am using just pure CSS. No frameworks, no pre-processors. We are ready for that! We have <a href="https://caniuse.com/css-variables">CSS Custom properties</a>, they are awesome.
+          It may not sound like a super innovative approach but here I am using just pure CSS. No frameworks, no pre-processors. We are ready for that! We have <ExternalLink href="https://caniuse.com/css-variables">CSS Custom properties</ExternalLink>, they are awesome.
         </p>
 
         <p>
-          This <a href="https://github.com/fibo/swipy-nav/blob/main/src/main.css">main.css</a> file is the starting point for all styles. It just contains the imports to styles splitted by categories and import to components styles. The build tool, in this case <em>Vite</em>, will do the rest.
+          This <ExternalLink href="https://github.com/fibo/swipy-nav/blob/main/src/main.css">main.css</ExternalLink> file is the starting point for all styles. It just contains the imports to styles splitted by categories and import to components styles. The build tool, in this case <em>Vite</em>, will do the rest.
         </p>
 
         <h3>Indenting</h3>
 
         <p>
-          I still think that <em>prettier</em> is a good choice in many cases but here I am using a different approach. Indendation for JS, TS and TSX files is provided by <a href="https://eslint.style/">ESLint Stylistic.</a> For CSS, HTML and JSON files I am using <a href="https://prettier.io/">Prettier</a>. On top of that there is a <a href="https://editorconfig.org/">.editorconfig</a> file to provide some basic settings.
+          I still think that <em>prettier</em> is a good choice in many cases but here I am using a different approach. Indendation for JS, TS and TSX files is provided by <ExternalLink href="https://eslint.style/">ESLint Stylistic.</ExternalLink> For CSS, HTML and JSON files I am using <ExternalLink href="https://prettier.io/">Prettier</ExternalLink>. On top of that there is a <ExternalLink href="https://editorconfig.org/">.editorconfig</ExternalLink> file to provide some basic settings.
         </p>
       </Content>
     </SwiperSlide>
