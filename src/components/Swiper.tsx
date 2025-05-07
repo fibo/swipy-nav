@@ -1,12 +1,4 @@
-import { Dispatch,
-  Fragment,
-  PointerEventHandler,
-  PropsWithChildren,
-  ReactNode,
-  SetStateAction,
-  useCallback,
-  useMemo,
-  useRef } from 'react'
+import { Dispatch, PointerEventHandler, ReactNode, SetStateAction, useCallback, useMemo, useRef } from 'react'
 
 export type SwiperProps = {
   slides: Array<{
@@ -63,24 +55,13 @@ export function Swiper({
       onPointerUp={onPointerUp}
     >
       <div
-        className="swiper-wrapper"
+        className="swiper__wrapper"
         style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
       >
         {slides.map(({ id, component }) => (
-          <Fragment key={id}>{component}</Fragment>
+          <div key={id} className="swiper__slide" data-slideid={id}>{component}</div>
         ))}
       </div>
     </div>
   )
-}
-
-type SwiperSlideProps = Partial<{
-  className: string
-}>
-
-export function SwiperSlide({
-  children,
-  className
-}: PropsWithChildren<SwiperSlideProps>) {
-  return <div className={`swiper-slide ${className ?? ''}`}>{children}</div>
 }

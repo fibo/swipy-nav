@@ -30,10 +30,7 @@ function NavbarItem({
   )
 }
 
-type NavbarProps = Pick<
-  SwiperProps,
-  'currentSlideIndex' | 'setCurrentSlideIndex'
-> & {
+type NavbarProps = Pick<SwiperProps, 'currentSlideIndex' | 'setCurrentSlideIndex'> & {
   slides: Slide[]
 }
 

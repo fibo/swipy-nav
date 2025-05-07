@@ -1,5 +1,9 @@
 import { PropsWithChildren } from 'react'
 
-export function Content({ children }: PropsWithChildren) {
-  return <div className="content">{children}</div>
+type Props = Partial<{
+  className: string
+}>
+
+export function Content({ children, className = '' }: PropsWithChildren<Props>) {
+  return <div className={`content ${className}`}>{children}</div>
 }
