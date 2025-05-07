@@ -1,14 +1,30 @@
 # Swipy Nav
 
-Run the app locally
+## Quick start
+
+See the [online demo](https://fibo.github.io/swipy-nav) or
+run the app locally with
 
 ```sh
 npm install
 npm start
 ```
 
-Or see the [online demo](https://fibo.github.io/swipy-nav)
+Then you can open your browser pressing
 
+```
+o ENTER
+```
+
+## Develop
+
+To run tests you also need to instal Playwright browsers:
+
+```sh
+npx playwright install
+```
+
+```sh
 ## Deploy
 
 Demo is deployed on GitHub Pages via [this GitHub Action](./.github/workflows/deploy.yml).
