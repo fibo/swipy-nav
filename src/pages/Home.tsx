@@ -24,6 +24,12 @@ export function Home() {
         This webapp is hosted on <em>GitHub Pages</em> with its source code available in the <ExternalLink href="https://github.com/fibo/swipy-nav">fibo/swipy-nav</ExternalLink> repository.
       </p>
 
+      <h3>Node.js</h3>
+
+      <p>
+        The <em>Node.js</em> version is managed by <ExternalLink href="https://volta.sh/">Volta</ExternalLink>.
+      </p>
+
       <h3>Testing</h3>
 
       <p>
