@@ -3,11 +3,8 @@ import { Home } from '#/pages/Home'
 import { Notifications } from '#/pages/Notifications'
 import { Settings } from '#/pages/Settings'
 
-export const slideIds = ['home', 'settings', 'notifications'] as const
-export type SlideId = (typeof slideIds)[number]
-
 export type Slide = {
-  id: SlideId
+  id: string
   component: ReactNode
 }
 

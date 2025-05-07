@@ -1,67 +1,56 @@
-import { Dispatch, PointerEventHandler, ReactNode, SetStateAction, useCallback, useMemo, useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { Slide } from '#/slides'
 
-export type SwiperProps = {
-  slides: Array<{
-    id: string
-    component: ReactNode
-  }>
+type Props = {
   currentSlideIndex: number
-  setCurrentSlideIndex: Dispatch<SetStateAction<number>>
+  setCurrentSlideIndex: (index: number) => void
+  slides: Slide[]
 }
 
-const swipeDelta = 25
+function computeIndex(
+  numSlides: number,
+  scrollLeft: number,
+  scrollWidth: number,
+): number {
+  return (numSlides * scrollLeft) / scrollWidth /* rounding */ + 0.5 | 0
+}
 
 export function Swiper({
   currentSlideIndex,
   setCurrentSlideIndex,
   slides
-}: SwiperProps) {
-  const startX = useRef(0)
-  const endX = useRef(0)
+}: Props) {
+  const ref = useRef<HTMLDivElement>(null)
 
-  const numSlides = useMemo(() => slides.length, [slides])
-
-  const onPointerDown = useCallback<PointerEventHandler<HTMLDivElement>>(
-    (event) => {
-      startX.current = event.clientX
-    },
-    []
-  )
-
-  const onPointerMove = useCallback<PointerEventHandler<HTMLDivElement>>(
-    (event) => {
-      endX.current = event.clientX
-    },
-    []
-  )
-
-  const onPointerUp = useCallback(() => {
-    // Do nothing if some text is selected.
-    if (getSelection()?.toString()) return
-    // Check if swipe is long enough to change slide.
-    if (startX.current - endX.current > swipeDelta) {
-      setCurrentSlideIndex((prevIndex) => Math.min(prevIndex + 1, numSlides - 1)
-      )
-    } else if (endX.current - startX.current > swipeDelta) {
-      setCurrentSlideIndex((prevIndex) => Math.max(prevIndex - 1, 0))
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    function updateSlideIndex(element: HTMLDivElement) {
+      const { scrollLeft, scrollWidth } = element
+      setCurrentSlideIndex(computeIndex(slides.length, scrollLeft, scrollWidth))
     }
-  }, [setCurrentSlideIndex, numSlides])
+    element.addEventListener('scrollsnapchanging', (event) => {
+      updateSlideIndex(event.target as HTMLDivElement)
+    })
+    element.addEventListener('scrollend', (event) => {
+      updateSlideIndex(event.target as HTMLDivElement)
+    })
+  }, [ref, slides, setCurrentSlideIndex])
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element) return
+    const { scrollLeft, scrollWidth } = element
+    const computedIndex = computeIndex(slides.length, scrollLeft, scrollWidth)
+    if (computedIndex == currentSlideIndex) return
+    document.querySelector(`[data-slideindex="${currentSlideIndex}"]`)?.scrollIntoView({ behavior: 'smooth' })
+  }, [ref, slides, currentSlideIndex])
 
   return (
-    <div
-      className="swiper"
-      onPointerDown={onPointerDown}
-      onPointerMove={onPointerMove}
-      onPointerUp={onPointerUp}
-    >
-      <div
-        className="swiper__wrapper"
-        style={{ transform: `translateX(-${currentSlideIndex * 100}%)` }}
-      >
-        {slides.map(({ id, component }) => (
-          <div key={id} className="swiper__slide" data-slideid={id}>{component}</div>
-        ))}
-      </div>
+    <div ref={ref} className="swiper">
+      {slides.map(({ id, component }, index) => (
+        <div key={id} className="swiper__slide" data-slideindex={index}>{component}</div>
+      ))}
     </div>
   )
 }

@@ -1,13 +1,18 @@
 import { MouseEventHandler, PropsWithChildren, useMemo } from 'react'
-import { SwiperProps } from '#/components/Swiper'
 import { Icon, IconName } from '#/components/Icon'
-import { Slide, SlideId } from '#/slides'
+import { Slide } from '#/slides'
 
 // Usually this info is in translations files.
-const navbarItemLabel: Record<SlideId, string> = {
+const navbarItemLabel: Record<string, string> = {
   home: 'Home',
   settings: 'Settings',
   notifications: 'Notifications'
+}
+
+const navbarItemIconName: Record<string, IconName> = {
+  home: 'home',
+  settings: 'gear',
+  notifications: 'bell'
 }
 
 type NavbarItemProps = {
@@ -30,12 +35,14 @@ function NavbarItem({
   )
 }
 
-type NavbarProps = Pick<SwiperProps, 'currentSlideIndex' | 'setCurrentSlideIndex'> & {
+type NavbarProps = {
+  currentSlideIndex: number
+  setCurrentSlideIndex: (index: number) => void
   slides: Slide[]
 }
 
 type Item = NavbarItemProps & {
-  id: SlideId
+  id: string
   label: string
   iconName: IconName
 }
@@ -50,7 +57,7 @@ export function Navbar({
       const isActive = currentSlideIndex == index
       return {
         id,
-        iconName: id,
+        iconName: navbarItemIconName[id],
         isActive,
         label: navbarItemLabel[id],
         onClick: (event) => {

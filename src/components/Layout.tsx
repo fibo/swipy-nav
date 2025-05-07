@@ -17,6 +17,7 @@ export function Layout({ slides }: Props) {
         setCurrentSlideIndex={setCurrentSlideIndex}
         slides={slides}
       />
+
       <Navbar
         currentSlideIndex={currentSlideIndex}
         setCurrentSlideIndex={setCurrentSlideIndex}

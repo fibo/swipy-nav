@@ -1,17 +1,23 @@
 .swiper {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  position: relative;
+  max-height: calc(100vh - var(--navbar-height));
+  overflow: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  scroll-snap-type: x mandatory;
 }
 
-.swiper__wrapper {
-  display: flex;
-  flex-direction: row;
-  transition: transform var(--duration-2) ease-in-out;
+/* Hide horyzontal scrollbar. */
+.swiper::-webkit-scrollbar {
+  display: none;
+}
+.swiper {
+  overscroll-behavior: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .swiper__slide {
-  min-height: calc(100vh - var(--navbar-height));
+  scroll-snap-align: center;
   min-width: 100%;
+  overflow: auto;
 }
