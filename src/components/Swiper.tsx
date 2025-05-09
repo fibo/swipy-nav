@@ -21,6 +21,7 @@ export function Swiper({
   slides
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
+  const ticking = useRef(false)
 
   useEffect(() => {
     const element = ref.current
@@ -29,12 +30,36 @@ export function Swiper({
       const { scrollLeft, scrollWidth } = element
       setCurrentSlideIndex(computeIndex(slides.length, scrollLeft, scrollWidth))
     }
-    element.addEventListener('scrollsnapchanging', (event) => {
-      updateSlideIndex(event.target as HTMLDivElement)
-    })
-    element.addEventListener('scrollend', (event) => {
-      updateSlideIndex(event.target as HTMLDivElement)
-    })
+    const isSupported = {
+      scroll: 'onscroll' in element,
+      scrollend: 'onscrollend' in element,
+      scrollsnapchanging: 'onscrollsnapchanging' in element,
+    }
+    // Safari does not support scrollend or scrollsnapchanging events.
+    // Fallback to scroll event.
+    if (isSupported.scrollend || isSupported.scrollsnapchanging) {
+      if (isSupported.scrollend) {
+        element.addEventListener('scrollend', (event) => {
+          updateSlideIndex(event.target as HTMLDivElement)
+        }, { passive: true })
+      }
+      if (isSupported.scrollsnapchanging) {
+        element.addEventListener('scrollendsnapchanging', (event) => {
+          updateSlideIndex(event.target as HTMLDivElement)
+        }, { passive: true })
+      }
+    } else if (isSupported.scroll) {
+      element.addEventListener('scroll', (event) => {
+        if (ticking.current) return
+        requestAnimationFrame(() => {
+          const { scrollLeft, scrollWidth } = event.target as HTMLDivElement
+          const computedIndex = computeIndex(slides.length, scrollLeft, scrollWidth)
+          setCurrentSlideIndex(computedIndex)
+          ticking.current = false
+        })
+        ticking.current = true
+      }, { passive: true })
+    }
   }, [ref, slides, setCurrentSlideIndex])
 
   useEffect(() => {
