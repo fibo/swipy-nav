@@ -1,0 +1,5 @@
+.slide {
+  scroll-snap-align: center;
+  min-width: 100%;
+  overflow: auto;
+}

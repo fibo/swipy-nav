@@ -3,12 +3,10 @@ import { Home } from '#/pages/Home'
 import { Notifications } from '#/pages/Notifications'
 import { Settings } from '#/pages/Settings'
 
-export type Slide = {
+export const slides: Array<{
   id: string
   component: ReactNode
-}
-
-export const slides: Slide[] = [
+}> = [
   {
     id: 'home',
     component: <Home />,

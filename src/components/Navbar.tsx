@@ -1,6 +1,5 @@
-import { MouseEventHandler, PropsWithChildren, useMemo } from 'react'
+import { MouseEventHandler, useMemo } from 'react'
 import { Icon, IconName } from '#/components/Icon'
-import { Slide } from '#/slides'
 
 // Usually this info is in translations files.
 const navbarItemLabel: Record<string, string> = {
@@ -18,43 +17,41 @@ const navbarItemIconName: Record<string, IconName> = {
 type NavbarItemProps = {
   isActive: boolean
   onClick: MouseEventHandler<HTMLButtonElement>
+  iconName: IconName
+  label: string
 }
 
 function NavbarItem({
   isActive,
   onClick,
-  children
-}: PropsWithChildren<NavbarItemProps>) {
+  iconName,
+  label
+}: NavbarItemProps) {
   return (
     <button
       className={`navbar__item ${isActive ? 'navbar__item--active' : ''}`}
       onClick={onClick}
     >
-      {children}
+      <Icon name={iconName} />
+      <span> {label} </span>
     </button>
   )
 }
 
 type NavbarProps = {
-  currentSlideIndex: number
+  activeNavbarItemIndex: number
   setCurrentSlideIndex: (index: number) => void
-  slides: Slide[]
-}
-
-type Item = NavbarItemProps & {
-  id: string
-  label: string
-  iconName: IconName
+  slideIds: string[]
 }
 
 export function Navbar({
-  currentSlideIndex,
+  activeNavbarItemIndex,
   setCurrentSlideIndex,
-  slides
+  slideIds
 }: NavbarProps) {
-  const items = useMemo<Item[]>(
-    () => slides.map(({ id }, index) => {
-      const isActive = currentSlideIndex == index
+  const items = useMemo<Array<NavbarItemProps & { id: string }>>(
+    () => slideIds.map((id, index) => {
+      const isActive = activeNavbarItemIndex == index
       return {
         id,
         iconName: navbarItemIconName[id],
@@ -67,19 +64,12 @@ export function Navbar({
         }
       }
     }),
-    [currentSlideIndex, slides]
+    [activeNavbarItemIndex, slideIds, setCurrentSlideIndex]
   )
 
   return (
     <nav className="navbar">
-      {items.map(({ id, label, iconName, ...props }) => {
-        return (
-          <NavbarItem key={id} {...props}>
-            <Icon name={iconName} />
-            <span> {label} </span>
-          </NavbarItem>
-        )
-      })}
+      {items.map(({ id, ...props }) => <NavbarItem key={id} {...props} />)}
     </nav>
   )
 }

@@ -1,10 +1,14 @@
-import { useEffect, useRef } from 'react'
-import { Slide } from '#/slides'
+import { ReactNode, useEffect, useMemo, useRef } from 'react'
+import { Slide } from '#/components/Slide'
 
 type Props = {
   currentSlideIndex: number
   setCurrentSlideIndex: (index: number) => void
-  slides: Slide[]
+  setActiveNavbarItemIndex: (index: number) => void
+  slides: Array<{
+    id: string
+    component: ReactNode
+  }>
 }
 
 function computeIndex(
@@ -18,63 +22,57 @@ function computeIndex(
 export function Swiper({
   currentSlideIndex,
   setCurrentSlideIndex,
-  slides
+  slides,
 }: Props) {
   const ref = useRef<HTMLDivElement>(null)
   const ticking = useRef(false)
 
+  const numSlides = useMemo(() => slides.length, [slides])
+
+  const isSupported = useMemo(() => {
+    const element = ref.current
+    if (!element) return
+    return {
+      scroll: 'onscroll' in element,
+      scrollend: 'onscrollend' in element,
+    }
+  }, [ref])
+
   useEffect(() => {
     const element = ref.current
     if (!element) return
-    function updateSlideIndex(element: HTMLDivElement) {
-      const { scrollLeft, scrollWidth } = element
-      setCurrentSlideIndex(computeIndex(slides.length, scrollLeft, scrollWidth))
-    }
-    const isSupported = {
-      scroll: 'onscroll' in element,
-      scrollend: 'onscrollend' in element,
-      scrollsnapchanging: 'onscrollsnapchanging' in element,
-    }
+    if (!isSupported) return
     // Safari does not support scrollend or scrollsnapchanging events.
     // Fallback to scroll event.
-    if (isSupported.scrollend || isSupported.scrollsnapchanging) {
+    if (isSupported.scrollend) {
       if (isSupported.scrollend) {
-        element.addEventListener('scrollend', (event) => {
-          updateSlideIndex(event.target as HTMLDivElement)
-        }, { passive: true })
-      }
-      if (isSupported.scrollsnapchanging) {
-        element.addEventListener('scrollendsnapchanging', (event) => {
-          updateSlideIndex(event.target as HTMLDivElement)
+        element.addEventListener('scrollend', () => {
+          const { scrollLeft, scrollWidth } = element
+          setCurrentSlideIndex(computeIndex(numSlides, scrollLeft, scrollWidth))
         }, { passive: true })
       }
     } else if (isSupported.scroll) {
-      element.addEventListener('scroll', (event) => {
+      element.addEventListener('scroll', () => {
         if (ticking.current) return
         requestAnimationFrame(() => {
-          const { scrollLeft, scrollWidth } = event.target as HTMLDivElement
-          const computedIndex = computeIndex(slides.length, scrollLeft, scrollWidth)
-          setCurrentSlideIndex(computedIndex)
+          // const { scrollLeft, scrollWidth } = event.target as HTMLDivElement
+          // const computedIndex = computeIndex(slides.length, scrollLeft, scrollWidth)
           ticking.current = false
         })
         ticking.current = true
       }, { passive: true })
     }
-  }, [ref, slides, setCurrentSlideIndex])
-
-  useEffect(() => {
-    const element = ref.current
-    if (!element) return
-    const { scrollLeft, scrollWidth } = element
-    const computedIndex = computeIndex(slides.length, scrollLeft, scrollWidth)
-    if (computedIndex == currentSlideIndex) return
-    document.querySelector(`[data-slideindex="${currentSlideIndex}"]`)?.scrollIntoView({ behavior: 'smooth' })
-  }, [ref, slides, currentSlideIndex])
+  }, [ref, isSupported, numSlides])
 
   return (
     <div ref={ref} className="swiper">
       {slides.map(({ id, component }, index) => (
-        <div key={id} className="swiper__slide" data-slideindex={index}>{component}</div>
+        <Slide
+          key={id}
+          currentSlideIndex={currentSlideIndex}
+          index={index}
+        >{component}
+        </Slide>
       ))}
     </div>
   )
